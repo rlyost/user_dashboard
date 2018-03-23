@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Add New User</title>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'css/userdash/userdash.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+    <h1>Add a new user</h1>
+    <form action='/create' method='POST'>
+        {% csrf_token %}
+        <label for="regemail">Email:<input type="text" name="regemail" id="regemail"></label>       
+        <label for="fname">First Name:<input type="text" name="fname" id="fname"></label>
+        <label for="lname">Last Name:<input type="text" name="lname" id="lname"></label>
+        <label for="regpassword">Password:<input type="password" name="regpassword" id="regpassword"></label>
+        <label for="regpassword2">Password Confirmation:<input type="password" name="regpassword2" id="regpassword2"></label>
+        <input type="submit" value="Create">
+    </form>
+    <p><a href="{%url 'admin' %}" class="options">Go Back</a></p>
+</body>
+</html>

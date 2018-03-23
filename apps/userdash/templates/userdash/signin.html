@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard - Sign-in</title>
+  {% load static %}
+    <link rel='stylesheet' href="{% static 'css/userdash/userdash.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+    <div id='wrapper'>
+        Yost Login and Registration Page
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags %} class='{{ message.tags }}' {% endif %}>
+                    <p class='red'>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <form action='/login' method='POST'>
+            {% csrf_token %}
+            <h2>Please Login</h2>
+            <label for="logemail">Email:<input type="text" name="logemail" id="logemail"></label>
+            <label for="logpassword">Password:<input type="password" name="logpassword" id="logpassword"></label>
+            <input type="submit" value="Login">
+        </form>
+        <a href="{%url 'reg' %}">Don't have an account?  Register.</a>
+
+    </div>
+</body>
+</html>
