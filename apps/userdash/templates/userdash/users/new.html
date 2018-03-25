@@ -5,16 +5,23 @@
     <link rel='stylesheet' href="{% static 'css/userdash/userdash.css' %}" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
+    <div class='top_ban'>
+        <a href="{%url 'dash' %}" class="options">Dashboard</a>
+        <a href="{%url 'profile' %}" class="options">Profile</a>
+        <a href="{%url 'ulogoff' %}" class="optend">Logoff</a>
+    </div>
     <h1>Add a new user</h1>
-    <form action='/create' method='POST'>
+    <a href="{%url 'dash' %}" class="options"><button class='but'>Back to Dashboard</button></a>
+    <form action='/register_val' method='POST'>
         {% csrf_token %}
-        <label for="regemail">Email:<input type="text" name="regemail" id="regemail"></label>       
+        <label for="email">Email:<input type="text" name="email" id="email"></label>       
         <label for="fname">First Name:<input type="text" name="fname" id="fname"></label>
         <label for="lname">Last Name:<input type="text" name="lname" id="lname"></label>
-        <label for="regpassword">Password:<input type="password" name="regpassword" id="regpassword"></label>
-        <label for="regpassword2">Password Confirmation:<input type="password" name="regpassword2" id="regpassword2"></label>
-        <input type="submit" value="Create">
+        <label for="password">Password:<input type="password" name="password" id="password"></label>
+        <label for="password2">Password Confirmation:<input type="password" name="password2" id="password2"></label>
+        <label for="level"><input type="hidden" name="level" id="level" value="normal"></label>
+        <input type="submit" value="Create" class='comment_but'>
     </form>
-    <p><a href="{%url 'admin' %}" class="options">Go Back</a></p>
+    
 </body>
 </html>

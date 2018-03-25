@@ -7,6 +7,10 @@
 </head>
 <body>
     <div id='wrapper'>
+        <div class='top_ban'>
+            <a href="/" class="options">Home</a>
+            <a href="{%url 'sign' %}" class="optend">Signin</a>
+        </div>
         Yost Login and Registration Page
         
         {% if messages %}
@@ -17,12 +21,12 @@
             {% endfor %}
         {% endif %}
         
-        <form action='/login' method='POST'>
+        <form action="{%url 'signval' %}" method='POST'>
             {% csrf_token %}
             <h2>Please Login</h2>
-            <label for="logemail">Email:<input type="text" name="logemail" id="logemail"></label>
-            <label for="logpassword">Password:<input type="password" name="logpassword" id="logpassword"></label>
-            <input type="submit" value="Login">
+            <label for="email">Email:<input type="text" name="email" id="email"></label>
+            <label for="password">Password:<input type="password" name="password" id="password"></label>
+            <input type="submit" value="Login" class='comment_but'>
         </form>
         <a href="{%url 'reg' %}">Don't have an account?  Register.</a>
 

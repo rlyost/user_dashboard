@@ -82,14 +82,14 @@ body {
     border: 1px solid black;
     background-color: rgb(5, 111, 218);
     box-shadow: 3px 3px black;
-    margin: 0 80%;
+    margin: 10px 80%;
 }
 .comment_but {
     color: white;
     border: 1px solid black;
     background-color: rgb(36, 138, 36);
     box-shadow: 3px 3px black;
-    margin: 0 70%;
+    margin: 10px 70%;
 }
 #message {
     width: 90%;
@@ -114,6 +114,13 @@ body {
     margin: 0 40px 0 10%;
     display: inline;
 }
+.top_ban {
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+}
+.optend {
+    margin: 0 0 0 425px;
+}
 a {
     margin: 0px 20px 0px 0px;
     display: inline-block;
@@ -132,6 +139,7 @@ h2 {
 form {
     width: 345px;
     margin: 0 auto;
+    padding: 20px 10px;
     min-height: 180px;
     text-align: right;
     text-align: top;
@@ -151,4 +159,18 @@ input[type=text] {
 label {
     display: block;
     word-wrap: break-word;
+}
+table {
+    border: 2px solid black;
+}
+th {
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    margin: 0 5px 0 5px;
+    padding: 3px 5px;
+}
+td {
+    border-left: 2px solid black;
+    margin: 0 5px 0 5px;
+    padding: 3px 5px;
 }

@@ -7,6 +7,10 @@
 </head>
 <body>
     <div id='wrapper'>
+        <div class='top_ban'>
+            <a href="/" class="options">Home</a>
+            <a href="{%url 'sign' %}" class="optend">Signin</a>
+        </div>
         
         {% if messages %}
             {% for message in messages %}
@@ -16,15 +20,16 @@
             {% endfor %}
         {% endif %}
         
-        <form action='/registration' method='POST'>
+        <form action="{%url 'regval' %}" method='POST'>
             {% csrf_token %}
             <h2>Register</h2>
-            <label for="regemail">Email:<input type="text" name="regemail" id="regemail"></label>       
+            <label for="email">Email:<input type="text" name="email" id="email"></label>       
             <label for="fname">First Name:<input type="text" name="fname" id="fname"></label>
             <label for="lname">Last Name:<input type="text" name="lname" id="lname"></label>
-            <label for="regpassword">Password:<input type="password" name="regpassword" id="regpassword"></label>
-            <label for="regpassword2">Password Confirmation:<input type="password" name="regpassword2" id="regpassword2"></label>
-            <input type="submit" value="Register">
+            <label for="password">Password:<input type="password" name="password" id="password"></label>
+            <label for="password2">Password Confirmation:<input type="password" name="password2" id="password2"></label>
+            <label for="level"><input type="hidden" name="level" id="level" value="normal"></label>
+            <input type="submit" value="Register" class='comment_but'>
         </form>
         <a href="{%url 'sign' %}">Already have an account?  Signin.</a>
     </div>
