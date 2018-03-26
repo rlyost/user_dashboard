@@ -129,7 +129,6 @@ def new(request):
 
 def show(request, id):
     this_user = User.objects.get(id=id)
-    print "this_user", this_user
     context = {
         'user': this_user,
         'user_posts': this_user.posts.all(),
@@ -209,3 +208,40 @@ def logoff(request):
     request.session['id'] = 0
     request.session['fname'] = ''
     return redirect('/')
+
+# POST MESSAGE *************************************************
+
+def post_msg(request):
+    if request.method == "POST":
+        profile_id = request.POST['id']
+        errors = User.objects.msg_validator(request.POST)
+        if errors is not None:
+            for tag, error in errors.iteritems():
+                messages.error(request, error, extra_tags=tag)
+            return redirect('ushow', profile_id)
+        else:
+            userid = request.session['id']
+            a1 = Post.objects.create(message=request.POST['post'], user=User.objects.get(id=userid))
+            a1.users.add(profile_id)
+            a1.save()
+
+            #Updates description in database for user profile
+            # Post.objects.create(message=request.POST['post'], poster=userid, users=request.POST['id'])
+            return redirect('ushow', profile_id)
+
+# POST COMMENT *************************************************
+
+def post_cmt(request):
+    if request.method == "POST":
+        profile_id = request.POST['id']
+        errors = User.objects.msg_validator(request.POST)
+        if errors is not None:
+            for tag, error in errors.iteritems():
+                messages.error(request, error, extra_tags=tag)
+            return redirect('ushow', profile_id)
+        else:
+            userid = request.session['id']
+            message_id = request.POST['message_id']
+            #Updates description in database for user profile
+            Comment.objects.create(comment=request.POST['comment'], poster=userid, users=request.POST['id'], message_id=request.POST['message_id'])
+            return redirect('ushow', profile_id)

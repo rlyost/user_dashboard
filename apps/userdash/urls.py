@@ -6,7 +6,6 @@ urlpatterns = [
     url(r'^register$', views.register, name='reg'),
     url(r'^register_val$', views.register_val, name='regval'),
     url(r'^dashboard$', views.dashboard, name='dash'),
-    url(r'^dashboard/admin$', views.admin, name='admin'),
     url(r'^signin$', views.signin, name='sign'),
     url(r'^signin_val$', views.signin_val, name='signval'),
     url(r'^users/show/(?P<id>\d+)$', views.show, name='ushow'),
@@ -18,4 +17,6 @@ urlpatterns = [
     url(r'^save$', views.save, name='usave'),
     url(r'^destroy/(?P<id>\d+)$', views.destroy, name='udestroy'),
     url(r'^logoff$', views.logoff, name='ulogoff'),
+    url(r'^post_msg$', views.post_msg, name='post_msg'),
+    url(r'^post_cmt', views.post_cmt, name='post_cmt'),
 ]

@@ -72,6 +72,13 @@ class UserManager(models.Manager):
         if not bcrypt.checkpw(postData['password'].encode(), log_pass.encode()):
             errors["email"] = "Password does not match."
             return errors
+
+    # MESSAGE/COMMENT validation
+    def msg_validator(self, postData):
+        errors = {}
+        if len(postData['post']) < 2:
+            errors['email'] = "Text field can not be blank."
+            return errors
    
 class User(models.Model):
     first_name = models.CharField(max_length=255)

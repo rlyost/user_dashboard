@@ -31,15 +31,17 @@
         <div id='main'>
             <!-- Add new message texted input. -->
                 <form action='/post_msg' method='POST' class='post_msg'>
+                    {% csrf_token %}
                     <h2>Leave a message for {{ session.fname }}</h2>
-                    <label for="message"><input type="text" name="message" id="message"></label>
+                    <label for="post"><input type="text" name="post" id="post"></label>
+                    <label for="id"><input type="hidden" name="id" id="id" value="{{ user.id }}"></label>
                     <input type="submit" value="Post a message" class="but">
                 </form>
                     
             <!-- display all message with comments on the Wall.     -->
             {% for post in user_posts %}
                 <div>
-                    <h3 class="poster">{{ post.first_name }} {{ post.last_name }} wrote
+                    <h3 class="poster">{{ post.user_id }} {{ post.users.user_id }} wrote
                     - {{ post.created_at }}</h3>
                     <div class="each_post">
                         <p class='each_post'>{{ post.message }}</p>
@@ -48,8 +50,10 @@
 
                 <!-- Add new comment text input. -->
                 <!-- <form action='/post_cmt' method='POST' class='post_cmt'>
-                    <label for="comment"><input type="text" name="comment" id="comment"></label>
+                    {% csrf_token %}
+                    <label for="post"><input type="text" name="post" id="post"></label>
                     <label for="message_id"><input type="hidden" name="message_id" id="message_id" value="{{ post.y }}" ></label>
+                    <label for="id"><input type="hidden" name="id" id="id" value="{{ user.id }}"></label>
                     <input type="submit" value="Post a comment" class="comment_but">
                 </form> -->
             {% endfor %}
