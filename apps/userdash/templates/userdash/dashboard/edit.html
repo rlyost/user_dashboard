@@ -19,14 +19,14 @@
             </div>
         {% endfor %}
     {% endif %}
-    <form action='/update' method='POST'>
+    <form action='/update' method='POST' class='login'>
         {% csrf_token %}
-        <h2>Edit Information</h2>
-        <label for="email">Email:<input type="text" name="email" id="email" value="{{ user.email }}"></label>
-        <label for="fname">First Name:<input type="text" name="fname" id="fname" value="{{ user.first_name }}"></label>
-        <label for="lname">Last Name:<input type="text" name="lname" id="lname" value="{{ user.last_name }}"></label>
+        <h2>Edit Information</h2><hr>
+        <label for="email" class='label'>Email:<input type="text" name="email" id="email" value="{{ user.email }}"></label>
+        <label for="fname" class='label'>First Name:<input type="text" name="fname" id="fname" value="{{ user.first_name }}"></label>
+        <label for="lname" class='label'>Last Name:<input type="text" name="lname" id="lname" value="{{ user.last_name }}"></label>
         <label for="id"><input type="hidden" name="id" id="id" value="{{ user.id }}"></label>
-        <label for="level">User Level:
+        <label for="level" class='label'>User Level:
             <select name="level">
                 <option value="normal" selected>Normal</option>
                 <option value="admin">Admin</option>
@@ -34,11 +34,11 @@
         </label>        
         <input type="submit" value="Save" class='comment_but'>
     </form>
-    <form action='/change' method='POST'>
+    <form action='/change' method='POST' class='login'>
         {% csrf_token %}
-        <h2>Change Password</h2>
-        <label for="password">Password:<input type="password" name="password" id="password"></label>
-        <label for="password2">Password Confirmation:<input type="password" name="password2" id="password2"></label>
+        <h2>Change Password</h2><hr>
+        <label for="password" class='label'>Password:<input type="password" name="password" id="password"></label>
+        <label for="password2" class='label'>Password Confirmation:<input type="password" name="password2" id="password2"></label>
         <label for="id"><input type="hidden" name="id" id="id" value="{{ user.id }}"></label>
         <input type="submit" value="Update Password" class='comment_but'>
     </form>

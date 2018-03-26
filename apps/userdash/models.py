@@ -100,7 +100,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
 
 class Comment(models.Model):
-    comments = models.CharField(max_length=255)
+    comment = models.CharField(max_length=255)
     post = models.ForeignKey(Post, related_name="commented")
     user = models.ForeignKey(User, related_name="comments")
     created_at = models.DateTimeField(auto_now_add = True)

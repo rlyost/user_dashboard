@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from time import gmtime, strftime
 from .models import *    
 import bcrypt
 
@@ -58,7 +57,7 @@ def register_val(request):
             #redirects to success to display sucessful login
             return redirect('dash')
 
-# SIGNIN *************************************************
+# SIGNIN VALIDATION *************************************************
 
 def signin_val(request):
     if request.method == "POST":
@@ -91,18 +90,13 @@ def signin_val(request):
             #redirects to success to display sucessful login
             return redirect('dash')
 
-# DASHBOARD - USER *************************************************
+# DASHBOARD - USER AND ADMIN *************************************************
 
 def dashboard(request):
     context = {
         'users': User.objects.all()
     }
     return render(request, 'userdash/dashboard.html', context)
-
-# DASHBOARD - ADMIN *************************************************
-
-def admin(request):
-    return redirect('dash')
 
 # EDIT - ADMIN *************************************************
 
@@ -125,18 +119,18 @@ def profile(request):
 def new(request):
     return render(request, 'userdash/users/new.html')
 
-# SHOW - USER *************************************************
+# SHOW - USER AND ADMIN *************************************************
 
 def show(request, id):
     this_user = User.objects.get(id=id)
     context = {
         'user': this_user,
-        'user_posts': this_user.posts.all(),
-        'comments': this_user.comments.all()
+        'user_posts': this_user.posts.all().select_related('user'),
+        'comments': Comment.objects.all()
     }
     return render(request, 'userdash/users/show.html', context)
 
-# UPDATE - INFO *************************************************
+# UPDATE - USER INFO *************************************************
 
 def update(request):
     if request.method == "POST":
@@ -177,7 +171,7 @@ def save(request):
             #redirects to dashboard
             return redirect('dash')
 
-# CHANGE - PASSWORD *************************************************
+# CHANGE PASSWORD *************************************************
 
 def change(request):
     if request.method == "POST":
@@ -195,11 +189,12 @@ def change(request):
             #redirects to success to display sucessful login
             return redirect('dash')
 
-# DESTROY - ADMIN *************************************************
+# DESTROY USER - ADMIN *************************************************
 
 def destroy(request, id):
     destroyit = User.objects.get(id=id)
     destroyit.delete()
+    # TO BE ADDED LATER -- DELETING POSTS AND COMMENTS SENT TO THE USER AND NOT POST AND COMMENTS TO OTHER USERS
     return redirect('dash')
 
 # LOGOFF *************************************************
@@ -224,9 +219,6 @@ def post_msg(request):
             a1 = Post.objects.create(message=request.POST['post'], user=User.objects.get(id=userid))
             a1.users.add(profile_id)
             a1.save()
-
-            #Updates description in database for user profile
-            # Post.objects.create(message=request.POST['post'], poster=userid, users=request.POST['id'])
             return redirect('ushow', profile_id)
 
 # POST COMMENT *************************************************
@@ -241,7 +233,5 @@ def post_cmt(request):
             return redirect('ushow', profile_id)
         else:
             userid = request.session['id']
-            message_id = request.POST['message_id']
-            #Updates description in database for user profile
-            Comment.objects.create(comment=request.POST['comment'], poster=userid, users=request.POST['id'], message_id=request.POST['message_id'])
+            b1 = Comment.objects.create(comment=request.POST['post'], user=User.objects.get(id=userid), post_id=request.POST['message_id'])
             return redirect('ushow', profile_id)

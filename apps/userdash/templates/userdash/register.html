@@ -20,14 +20,14 @@
             {% endfor %}
         {% endif %}
         
-        <form action="{%url 'regval' %}" method='POST'>
+        <form action="{%url 'regval' %}" method='POST' class='login'>
             {% csrf_token %}
             <h2>Register</h2>
-            <label for="email">Email:<input type="text" name="email" id="email"></label>       
-            <label for="fname">First Name:<input type="text" name="fname" id="fname"></label>
-            <label for="lname">Last Name:<input type="text" name="lname" id="lname"></label>
-            <label for="password">Password:<input type="password" name="password" id="password"></label>
-            <label for="password2">Password Confirmation:<input type="password" name="password2" id="password2"></label>
+            <label for="email" class='label'>Email:<input type="text" name="email" id="email"></label>       
+            <label for="fname" class='label'>First Name:<input type="text" name="fname" id="fname"></label>
+            <label for="lname" class='label'>Last Name:<input type="text" name="lname" id="lname"></label>
+            <label for="password" class='label'>Password:<input type="password" name="password" id="password"></label>
+            <label for="password2" class='label'>Password Confirmation:<input type="password" name="password2" id="password2"></label>
             <label for="level"><input type="hidden" name="level" id="level" value="normal"></label>
             <input type="submit" value="Register" class='comment_but'>
         </form>
